@@ -1,8 +1,15 @@
 import React, { useState, memo } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { Layout, Menu, Icon, Typography } from 'antd'
+import { Layout, Menu, Typography } from 'antd'
 import { ReactComponent as LogoIcon } from '@static/logo.svg'
+import {
+  UserOutlined,
+  VideoCameraOutlined,
+  UploadOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+} from '@ant-design/icons'
 
 const LandingLayout = ({ children }) => {
   const [collapsed, toggle] = useState(true)
@@ -33,28 +40,29 @@ const LandingLayout = ({ children }) => {
             className='border-0'
           >
             <Menu.Item key='1'>
-              <Icon type='user' />
+              <UserOutlined />
               <span>nav 1</span>
             </Menu.Item>
             <Menu.Item key='2'>
-              <Icon type='video-camera' />
+              <VideoCameraOutlined />
               <span>nav 2</span>
             </Menu.Item>
             <Menu.Item key='3'>
-              <Icon type='upload' />
+              <UploadOutlined />
               <span>nav 3</span>
             </Menu.Item>
           </Menu>
         </Layout.Sider>
         <Layout>
           <Layout.Header style={{ background: '#fff', padding: 0 }}>
-            <Icon
-              className='leading-normal ml-4 text-base'
-              type={collapsed ? 'menu-unfold' : 'menu-fold'}
+            <Layout.Content
               onClick={() => toggle(!collapsed)}
-            />
+              className='leading-normal ml-4 align-bottom text-base'
+            >
+              {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            </Layout.Content>
           </Layout.Header>
-          <Layout.Content
+          <div
             style={{
               margin: '24px 16px',
               padding: 24,
@@ -63,7 +71,7 @@ const LandingLayout = ({ children }) => {
             }}
           >
             <div style={{ minHeight: '100vh' }}>{children}</div>
-          </Layout.Content>
+          </div>
         </Layout>
       </Layout>
     </div>
